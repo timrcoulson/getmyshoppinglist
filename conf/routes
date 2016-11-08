@@ -1,0 +1,13 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+PUT    /v1/plan                       com.getmyshoppinglist.api.controllers.PlansController.create
+GET    /v1/plan/:id                   com.getmyshoppinglist.api.controllers.PlansController.get(id: String)
+PATCH  /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.replaceRecipe(id: String, recipeId: Int)
+DELETE /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.removeRecipe(id: String, recipeId: Int)
+PUT    /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.newRecipe(id: String, recipeId: Int)
+
+GET    /v1/recipes                    com.getmyshoppinglist.api.controllers.RecipesContoller.search(query: String)
+GET    /v1/products                   com.getmyshoppinglist.api.controllers.ProductsController.index
+GET    /status                        com.getmyshoppinglist.api.controllers.StatusController.index
