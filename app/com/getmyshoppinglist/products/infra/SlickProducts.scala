@@ -21,7 +21,7 @@ class SlickProducts @Inject()(protected val dbConfigProvider: DatabaseConfigProv
 
   // Keep all the products in memory
   override def all(): Future[Seq[Product]] = {
-    if (SlickProducts.all == null) {
+//    if (SlickProducts.all == null) { // TODO comment back in later
       SlickProducts.all = db.run(
         sql"""
       SELECT
@@ -30,7 +30,7 @@ class SlickProducts @Inject()(protected val dbConfigProvider: DatabaseConfigProv
       JOIN product_sources ps on p.name = ps.name
       """.as[Product]
       )
-    }
+//    }
     SlickProducts.all
   }
 }
