@@ -1,6 +1,6 @@
--- PRODUCTS schema
+# Schema
 
--- --- !Ups
+# --- !Ups
 
 CREATE TABLE "products" (
   id            BIGSERIAL primary key,
@@ -51,9 +51,10 @@ CREATE TABLE "ingredients" (
   url   VARCHAR(255) NOT NULL
 );
 
--- --- !Downs
+# --- !Downs
 
 DROP TABLE "products";
 DROP TABLE "product_sources";
 DROP TABLE "recipes";
 DROP TABLE "ingredients";
+DROP TABLE "recipes_ingredients;
