@@ -48,7 +48,7 @@ class SlickRecipes @Inject()(protected val dbConfigProvider: DatabaseConfigProvi
       JOIN recipes_ingredients ri ON ri.recipe_id = r.id
       JOIN ingredients i ON ri.ingredient_id = i.id
       WHERE r.deleted_at is null
-      AND r.active = 1
+      AND r.active = true
       """
   }
 

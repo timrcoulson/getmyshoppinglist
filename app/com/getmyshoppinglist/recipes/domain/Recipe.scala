@@ -6,7 +6,7 @@ import play.api.libs.json.{JsValue, Json, Writes}
 /**
   * Created by timcoulson on 30/10/2016.
   */
-case class Recipe(id: Int, name: String, link: String, serves: Int, cost: Int, img: String, description: String, ingredients: Ingredients, method: Seq[String], prepTime: Int, cookingTime: Int)
+case class Recipe(id: Int, name: String, link: String, serves: Int, img: String, description: String, ingredients: Ingredients, method: Seq[String], prepTime: Int, cookingTime: Int)
 
 object Recipe {
   def fromRow(rows: Seq[(RecipeRow, Ingredient)]): Recipe = {
@@ -16,7 +16,6 @@ object Recipe {
       recipeRow.name,
       recipeRow.link,
       recipeRow.serves,
-      recipeRow.cost,
       recipeRow.img,
       recipeRow.description,
       new Ingredients(rows.map(_._2)),
@@ -38,8 +37,7 @@ object Recipe {
         "prepTime" -> recipe.prepTime,
         "cookingTime" -> recipe.cookingTime,
         "ingredients" -> Json.toJson(recipe.ingredients),
-        "method" -> Json.toJson(recipe.method),
-        "cost" -> recipe.cost
+        "method" -> Json.toJson(recipe.method)
       )
     }
   }

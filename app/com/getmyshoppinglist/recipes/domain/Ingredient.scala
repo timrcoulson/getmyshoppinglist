@@ -9,7 +9,7 @@ import slick.jdbc.GetResult
 case class Ingredient(
                        id: Int,
                        name: String,
-                       aisle: Boolean,
+                       aisle: String,
                        keeps: Boolean,
                        exact: Boolean,
                        quantity: Int,
