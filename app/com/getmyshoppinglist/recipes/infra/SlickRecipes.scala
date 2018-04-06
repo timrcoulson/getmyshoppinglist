@@ -42,8 +42,8 @@ class SlickRecipes @Inject()(protected val dbConfigProvider: DatabaseConfigProvi
   private def baseQuery(heads: String = "1", extra: String = ""): SQLActionBuilder = {
     sql"""
       SELECT
-      r.id, r.name, r.link, r.serves, r.alt_cost_per_head, r.img, r.description, r.method, r.prep_time, r.cooking_time,
-      i.id, i.name, i.aisle, i.keeps, i.exact, i.url, (ri.quantity * #$heads / r.serves), ri.unit, ri.scales
+      r.id, r.name, r.link, r.serves, r.img, r.description, r.method, r.prep_time, r.cooking_time,
+      i.id, i.name, i.aisle, i.keeps, i.exact, (ri.quantity * #$heads / r.serves), ri.unit, ri.scales
       FROM recipes r
       JOIN recipes_ingredients ri ON ri.recipe_id = r.id
       JOIN ingredients i ON ri.ingredient_id = i.id
