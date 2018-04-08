@@ -13,8 +13,7 @@ case class Ingredient(
                        keeps: Boolean,
                        exact: Boolean,
                        quantity: Int,
-                       unit: String,
-                       scales: String
+                       unit: String
                      )
 
 object Ingredient {
@@ -27,11 +26,10 @@ object Ingredient {
         "keeps" -> ingredient.keeps,
         "exact" -> ingredient.exact,
         "quantity" -> ingredient.quantity,
-        "unit" -> ingredient.unit,
-        "scales" -> ingredient.scales
+        "unit" -> ingredient.unit
       )
     }
   }
 
-  implicit val getIngredient = GetResult(r => Ingredient(r.<<, r.<<, r.<<, r.<<, r.<<, r.<<, r.<<, r.<<))
+  implicit val getIngredient = GetResult(r => Ingredient(r.<<, r.<<, r.<<, r.<<, r.<<, r.<<, r.<<))
 }

@@ -43,7 +43,7 @@ class SlickRecipes @Inject()(protected val dbConfigProvider: DatabaseConfigProvi
     sql"""
       SELECT
       r.id, r.name, r.link, r.serves, r.img, r.description, r.method, r.prep_time, r.cooking_time,
-      i.id, i.name, i.aisle, i.keeps, i.exact, (ri.quantity * #$heads / r.serves), ri.unit, ri.scales
+      i.id, i.name, i.aisle, i.keeps, i.exact, (ri.quantity * #$heads / r.serves), ri.unit
       FROM recipes r
       JOIN recipes_ingredients ri ON ri.recipe_id = r.id
       JOIN ingredients i ON ri.ingredient_id = i.id
