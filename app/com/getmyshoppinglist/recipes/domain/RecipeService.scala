@@ -14,6 +14,10 @@ import scala.util.Random
   * Created by timcoulson on 09/11/2016.
   */
 class RecipeService @Inject()(productService: ProductService, recipes: Recipes) {
+  def add(recipe: Recipe): Future[Int] = {
+    recipes.add(recipe)
+  }
+
   def search(query: String): Future[Seq[Recipe]] = {
     recipes.all().map(recipes => {
       recipes.filter(recipe => recipe.name.toLowerCase().contains(query.toLowerCase()))
@@ -27,7 +31,7 @@ class RecipeService @Inject()(productService: ProductService, recipes: Recipes) 
       })
   }
 
-  def find(id: Int, preferences: Preferences): Future[Option[Recipe]] = {
+  def find(id: String, preferences: Preferences): Future[Option[Recipe]] = {
     recipes.find(id, preferences)
   }
 

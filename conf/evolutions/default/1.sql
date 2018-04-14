@@ -3,8 +3,8 @@
 # --- !Ups
 
 CREATE TABLE "products" (
-  id            BIGSERIAL PRIMARY KEY,
-  ingredient_id BIGSERIAL NOT NULL,
+  id            UUID PRIMARY KEY,
+  ingredient_id UUID NOT NULL,
   name     VARCHAR(255) NOT NULL,
   quantity BIGINT       NOT NULL,
   unit     VARCHAR(255) NOT NULL,
@@ -13,14 +13,14 @@ CREATE TABLE "products" (
 );
 
 CREATE TABLE "product_sources" (
-  id            BIGSERIAL PRIMARY KEY,
+  id            UUID PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   url  VARCHAR(255) NOT NULL,
   type VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE "recipes" (
-  id            BIGSERIAL PRIMARY KEY,
+  id           UUID PRIMARY KEY,
   name              VARCHAR(255) NOT NULL,
   link              VARCHAR(255) NOT NULL,
   serves            BIGINT       NOT NULL,
@@ -35,15 +35,15 @@ CREATE TABLE "recipes" (
 );
 
 CREATE TABLE "recipes_ingredients" (
-  ingredient_id BIGSERIAL NOT NULL,
-  recipe_id     BIGSERIAL NOT NULL,
+  ingredient_id UUID NOT NULL,
+  recipe_id     UUID NOT NULL,
   unit     VARCHAR(255) NOT NULL,
   scales   VARCHAR(255) NOT NULL,
   quantity BIGINT       NOT NULL
 );
 
 CREATE TABLE "ingredients" (
-  id    BIGSERIAL PRIMARY KEY,
+  id    UUID PRIMARY KEY,
   name  VARCHAR(255) NOT NULL,
   aisle VARCHAR(255) NOT NULL,
   keeps BOOL         NOT NULL,

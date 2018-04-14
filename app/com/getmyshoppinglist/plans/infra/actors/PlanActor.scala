@@ -21,10 +21,10 @@ class PlanActor @Inject()(planService: PlanService, plans: Plans) extends Actor 
   val queue = new ConcurrentHashMap[String, Future[Any]]().asScala
 
   def receive = {
-    case AddRecipe(id: String, recipeId: Int) => pushToQueue(id, () => planService.addRecipe(id, recipeId).flatMap(plans.save))
-    case RemoveRecipe(id: String, recipeId: Int) => pushToQueue(id, () => planService.removeRecipe(id, recipeId).flatMap(plans.save))
+    case AddRecipe(id: String, recipeId: String) => pushToQueue(id, () => planService.addRecipe(id, recipeId).flatMap(plans.save))
+    case RemoveRecipe(id: String, recipeId: String) => pushToQueue(id, () => planService.removeRecipe(id, recipeId).flatMap(plans.save))
     case SavePlan(plan: Plan) => pushToQueue(plan.id.toString, () => plans.save(plan))
-    case SwapRecipe(id: String, recipeId: Int) => pushToQueue(id, () => planService.swapRecipe(id, recipeId).flatMap(plans.save))
+    case SwapRecipe(id: String, recipeId: String) => pushToQueue(id, () => planService.swapRecipe(id, recipeId).flatMap(plans.save))
     case GeneratePlan(preferences: Preferences) => planService.generate(preferences) pipeTo sender()
     case RetrievePlan(id: String) => pushToQueue(id, () => planService.retrieve(id))
   }

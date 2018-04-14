@@ -33,7 +33,7 @@ class SlickPlans @Inject()(protected val dbConfigProvider: DatabaseConfigProvide
     """.as[PlanRow]
   ).map(
     pr =>
-      pr.map(pr => new Plan(UUID.randomUUID(), Preferences(1, 2, "Hello"), Seq(), Seq())).head // TODO fix this deserialisation
+      pr.map(pr => new Plan(UUID.randomUUID(), Preferences(1, 2, "Helo"), Seq(), Seq())).head // TODO fix this deserialisation
   )
 }
 

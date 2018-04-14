@@ -18,7 +18,7 @@ case class Plan(
 
   lazy val costPerHead = to2dp(cost / (preferences.meals * preferences.people))
 
-  def withoutRecipe(recipeId: Int): Plan = {
+  def withoutRecipe(recipeId: String): Plan = {
     copy(recipes = recipes.filterNot(recipe => recipeId == recipe.id))
   }
 
@@ -30,7 +30,7 @@ case class Plan(
     copy(products = products)
   }
 
-  def replaceRecipe(recipeId: Int, otherRecipes: Seq[Recipe]): Plan = {
+  def replaceRecipe(recipeId: String, otherRecipes: Seq[Recipe]): Plan = {
     val newRecipes = recipes.map(recipe => {
       lazy val unusedRecipes = otherRecipes.filter(recipe => contains(recipe.id))
       if (recipe.id == recipeId) {
@@ -42,7 +42,7 @@ case class Plan(
     copy(recipes = newRecipes)
   }
 
-  def contains(recipeId: Int): Boolean = {
+  def contains(recipeId: String): Boolean = {
     recipes.exists(planRecipe => planRecipe.id == recipeId)
   }
 

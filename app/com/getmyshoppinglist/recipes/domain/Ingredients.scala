@@ -1,6 +1,6 @@
 package com.getmyshoppinglist.recipes.domain
 
-import play.api.libs.json.{JsValue, Json, Writes}
+import play.api.libs.json._
 
 /**
   * Created by timcoulson on 09/11/2016.

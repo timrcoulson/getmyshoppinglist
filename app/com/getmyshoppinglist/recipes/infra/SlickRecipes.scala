@@ -19,7 +19,7 @@ class SlickRecipes @Inject()(protected val dbConfigProvider: DatabaseConfigProvi
 
   import driver.api._
 
-  def getRecipes(recipeIds: Set[Int]): Future[List[Recipe]] = {
+  def getRecipes(recipeIds: Set[String]): Future[List[Recipe]] = {
     all().map(recipes => {
       recipes.filter(recipe => recipeIds.contains(recipe.id)).toList
     })
@@ -58,9 +58,52 @@ class SlickRecipes @Inject()(protected val dbConfigProvider: DatabaseConfigProvi
     })
   }
 
-  override def find(id: Int, preferences: Preferences): Future[Option[Recipe]] = {
+  override def find(id: String, preferences: Preferences): Future[Option[Recipe]] = {
     all().map(recipes => {
       recipes.find(recipe => recipe.id == id)
     })
+  }
+
+  override def add(recipe: Recipe): Future[Int] = {
+    // Insert recipe
+    val values1  = Seq(
+      recipe.id,
+      recipe.name,
+      recipe.link,
+      recipe.serves,
+      true,
+      recipe.img,
+      recipe.description,
+      "[\"" + recipe.method.mkString("\",\"") + "\"]",
+      recipe.prepTime,
+      recipe.cookingTime,
+      "N/A"
+    ).mkString("','")
+    val query1 = sql"""
+      INSERT INTO recipes (id, name, link, serves, active, img, description, method, prep_time, cooking_time, type) VALUES
+      ('#$values1')
+    """
+
+    db.run(query1.asUpdate)
+
+    // Insert ingredients
+    val values = recipe.ingredients.items.map(i => {
+      Seq(i.id, i.name, i.aisle, i.keeps, i.exact).mkString("', '")
+    }).mkString("),\n(")
+    val query = sql"""
+      INSERT INTO ingredients (id, name, aisle, keeps, exact) VALUES
+        ('#$values')
+    """
+    db.run(query.asUpdate)
+
+    // Insert into pivot table
+    val values3 = recipe.ingredients.items.map(i => {
+      Seq(i.id, recipe.id, i.unit, i.quantity).mkString("', '")
+    }).mkString("),\n(")
+    val query3 = sql"""
+      INSERT INTO recipes_ingredients (ingredient_id, recipe_id, unit, quantity) VALUES
+        ('#$values3')
+    """
+    db.run(query3.asUpdate)
   }
 }

@@ -4,10 +4,11 @@
 
 PUT    /v1/plan                       com.getmyshoppinglist.api.controllers.PlansController.create
 GET    /v1/plan/:id                   com.getmyshoppinglist.api.controllers.PlansController.get(id: String)
-PATCH  /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.replaceRecipe(id: String, recipeId: Int)
-DELETE /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.removeRecipe(id: String, recipeId: Int)
-PUT    /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.newRecipe(id: String, recipeId: Int)
+PATCH  /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.replaceRecipe(id: String, recipeId: String)
+DELETE /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.removeRecipe(id: String, recipeId: String)
+PUT    /v1/plan/:id/recipe/:recipeId  com.getmyshoppinglist.api.controllers.PlansController.newRecipe(id: String, recipeId: String)
 
 GET    /v1/recipes                    com.getmyshoppinglist.api.controllers.RecipesContoller.search(query: String)
+POST    /v1/recipes                    com.getmyshoppinglist.api.controllers.RecipesContoller.create
 GET    /v1/products                   com.getmyshoppinglist.api.controllers.ProductsController.index
 GET    /status                        com.getmyshoppinglist.api.controllers.StatusController.index

@@ -1,3 +1,3 @@
 package com.getmyshoppinglist.plans.domain.requests
 
-case class AddRecipe(id: String, recipeId: Int) extends PlanRequest
+case class AddRecipe(id: String, recipeId: String) extends PlanRequest

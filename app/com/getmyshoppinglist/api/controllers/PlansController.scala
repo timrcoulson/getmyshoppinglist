@@ -34,9 +34,9 @@ class PlansController @Inject()(@Named("plans") plansActor: ActorRef, actorSyste
 
   private def execute(request: PlanRequest): Future[Result] = (plansActor ? request).mapTo[Plan].map(plan => Ok(Json.obj("data" -> plan)))
 
-  def replaceRecipe(id: String, recipeId: Int) = Action.async { implicit req => execute(SwapRecipe(id, recipeId)) }
+  def replaceRecipe(id: String, recipeId: String) = Action.async { implicit req => execute(SwapRecipe(id, recipeId)) }
 
-  def newRecipe(id: String, recipeId: Int) = Action.async { implicit req => execute(AddRecipe(id, recipeId)) }
+  def newRecipe(id: String, recipeId: String) = Action.async { implicit req => execute(AddRecipe(id, recipeId)) }
 
-  def removeRecipe(id: String, recipeId: Int) = Action.async { implicit req => execute(RemoveRecipe(id, recipeId)) }
+  def removeRecipe(id: String, recipeId: String) = Action.async { implicit req => execute(RemoveRecipe(id, recipeId)) }
 }
